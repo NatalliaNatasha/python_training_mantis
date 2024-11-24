@@ -18,21 +18,33 @@ testdata=[Project(name=random_string("name",5), description="")]+ [
     ]
 
 
+# @pytest.mark.parametrize("project",testdata)
+# def test_add_project(app,project):
+#     app.session.login("administrator", "root")
+#     old_projects=app.helper_project.get_project_list()
+#     print(old_projects)
+#     app.helper_project.open_projects_page()
+#     app.helper_project.fill_project_form(project)
+#     app.helper_project.open_projects_page()
+#     new_projects=app.helper_project.get_project_list()
+#     print(new_projects)
+#     assert len(old_projects) + 1 == len(new_projects)
+#     old_projects.append(project)
+#     assert sorted(old_projects, key=Project.id_or_max) == sorted(new_projects, key=Project.id_or_max)
+
 @pytest.mark.parametrize("project",testdata)
 def test_add_project(app,project):
     app.session.login("administrator", "root")
-    old_projects=app.helper_project.get_project_list()
+    old_projects=app.soap.get_project_list()
     print(old_projects)
     app.helper_project.open_projects_page()
     app.helper_project.fill_project_form(project)
     app.helper_project.open_projects_page()
-    new_projects=app.helper_project.get_project_list()
+    new_projects=app.soap.get_project_list()
     print(new_projects)
     assert len(old_projects) + 1 == len(new_projects)
     old_projects.append(project)
     assert sorted(old_projects, key=Project.id_or_max) == sorted(new_projects, key=Project.id_or_max)
-
-
 
 
 
