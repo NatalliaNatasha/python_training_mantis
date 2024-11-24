@@ -23,7 +23,6 @@ class SoapHelper:
         try:
             get_user_projects = client.service.mc_projects_get_user_accessible("administrator", "root")
             return get_user_projects
-            print(get_user_projects)
         except WebFault as fault:
             return fault
 
